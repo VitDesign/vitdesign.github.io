@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Thiết Kế</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(102, 126, 234, 0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(118, 75, 162, 0.8));
+            }
+        }
+
+        .logo-slogan {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: normal;
+            margin-top: 0.2rem;
+            animation: fadeIn 1s ease-in 0.3s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .admin-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admin-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .admin-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .admin-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.6s ease-out;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.25);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 0.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: #764ba2;
+            animation: expandWidth 1s ease-out;
+        }
+
+        @keyframes expandWidth {
+            from {
+                width: 0;
+            }
+            to {
+                width: 50%;
+            }
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            aspect-ratio: 1;
+            animation: zoomIn 0.5s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+            z-index: 10;
+        }
+
+        .gallery-item::before {
+            content: '👁';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            font-size: 3rem;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
+        }
+
+        .gallery-item:hover::before {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            animation: modalZoom 0.4s ease forwards;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+        }
+
+        @keyframes modalZoom {
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: #f1f1f1;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+
+        .close:hover {
+            color: #667eea;
+            transform: rotate(90deg) scale(1.2);
+        }
+
+        .modal-contact {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            animation: slideUp 0.5s ease;
+            z-index: 1002;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        .modal-contact h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 1.2rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .contact-btn.facebook {
+            background: linear-gradient(135deg, #1877f2 0%, #0c5fcd 100%);
+            color: white;
+        }
+
+        .contact-btn.phone {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+        }
+
+        .contact-btn.zalo {
+            background: linear-gradient(135deg, #0068FF 0%, #0047B3 100%);
+            color: white;
+        }
+
+        .contact-btn.page {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .admin-panel {
+            display: none;
+        }
+
+        .login-form {
+            max-width: 400px;
+            margin: 5rem auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: bounceIn 0.6s ease;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .login-form h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .admin-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .admin-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .admin-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .admin-actions {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.7);
+            padding: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+        }
+
+        .admin-actions button {
+            padding: 0.4rem 0.8rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .edit-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .delete-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .file-input-label {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .file-input-label:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        .preview-image {
+            max-width: 200px;
+            margin-top: 1rem;
+            border-radius: 10px;
+            animation: zoomIn 0.5s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            margin-top: 3rem;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            color: #555;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-item a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .contact-item a:hover {
+            color: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        .contact-item a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .contact-item a:hover::after {
+            width: 100%;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div>
+                <div class="logo">VitDesign</div>
+                <div class="logo-slogan">Sáng tạo không giới hạn - Thiết kế truyền cảm hứng</div>
+            </div>
+            <div class="nav-links">
+                <a href="#" onclick="showCategory('all')">Tổng Quan</a>
+                <a href="#" onclick="showCategory('logo')">Logo</a>
+                <a href="#" onclick="showCategory('banner')">Banner</a>
+                <a href="#" onclick="showCategory('poster')">Poster</a>
+                <button class="admin-btn" onclick="showLoginForm()">Admin</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Public View -->
+    <div id="publicView" class="container">
+        <div class="section" id="allSection">
+            <h2 class="section-title">Tổng Quan</h2>
+            <div id="overviewGallery" class="gallery"></div>
+        </div>
+
+        <div class="section hidden" id="logoSection">
+            <h2 class="section-title">Logo</h2>
+            <div id="logoGallery" class="gallery"></div>
+        </div>
+
+        <div class="section hidden" id="bannerSection">
+            <h2 class="section-title">Banner</h2>
+            <div id="bannerGallery" class="gallery"></div>
+        </div>
+
+        <div class="section hidden" id="posterSection">
+            <h2 class="section-title">Poster</h2>
+            <div id="posterGallery" class="gallery"></div>
+        </div>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm" style="display: none;">
+        <div class="login-form">
+            <h2>Đăng Nhập Admin</h2>
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="password" placeholder="Nhập mật khẩu">
+            </div>
+            <button class="btn" onclick="login()">Đăng Nhập</button>
+            <p id="loginError" style="color: red; text-align: center; margin-top: 1rem;"></p>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel" class="admin-panel container">
+        <div class="section">
+            <h2 class="section-title">Thêm Thiết Kế Mới</h2>
+            <div class="form-group">
+                <label>Danh mục</label>
+                <select id="category">
+                    <option value="logo">Logo</option>
+                    <option value="banner">Banner</option>
+                    <option value="poster">Poster</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="imageUpload" class="file-input-label">Chọn Ảnh</label>
+                <input type="file" id="imageUpload" accept="image/*" onchange="previewImage(event)">
+                <img id="imagePreview" class="preview-image" style="display: none;">
+            </div>
+            <button class="btn" onclick="addImage()">Thêm Ảnh</button>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Quản Lý Logo</h2>
+            <div id="adminLogoGallery" class="admin-gallery"></div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Quản Lý Banner</h2>
+            <div id="adminBannerGallery" class="admin-gallery"></div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">Quản Lý Poster</h2>
+            <div id="adminPosterGallery" class="admin-gallery"></div>
+        </div>
+
+        <button class="btn" style="max-width: 300px; margin: 2rem auto; display: block;" onclick="logout()">Đăng Xuất</button>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modalImage">
+        <div class="modal-contact" onclick="event.stopPropagation()">
+            <h3>📞 Liên hệ đặt thiết kế</h3>
+            <div class="contact-buttons">
+                <a href="https://www.facebook.com/ngoc.nhi.80187" target="_blank" class="contact-btn facebook">
+                    📘 Facebook
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61578026505309" target="_blank" class="contact-btn page">
+                    📄 Page
+                </a>
+                <a href="tel:0966957102" class="contact-btn phone">
+                    📞 Gọi ngay
+                </a>
+                <a href="https://zalo.me/0966957102" target="_blank" class="contact-btn zalo">
+                    💬 Zalo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-title">VitDesign</div>
+            <p style="color: #666; margin: 0.5rem 0;">Liên hệ với chúng tôi</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    📞 <a href="tel:0966957102">0966 957 102</a>
+                </div>
+                <div class="contact-item">
+                    📘 <a href="https://facebook.com/vitdessign" target="_blank">Facebook: vitdessign</a>
+                </div>
+                <div class="contact-item">
+                    📄 <a href="https://facebook.com/vitdessign" target="_blank">Page: vitdessign</a>
+                </div>
+            </div>
+            <p style="color: #999; margin-top: 1.5rem; font-size: 0.9rem;">© 2024 VitDesign. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data storage
+        let designs = {
+            logo: [
+                { id: 1, src: 'https://via.placeholder.com/400x400/667eea/ffffff?text=Logo+Design+1', category: 'logo' },
+                { id: 2, src: 'https://via.placeholder.com/400x400/764ba2/ffffff?text=Logo+Design+2', category: 'logo' },
+                { id: 3, src: 'https://via.placeholder.com/400x400/f093fb/ffffff?text=Logo+Design+3', category: 'logo' },
+                { id: 4, src: 'https://via.placeholder.com/400x400/4facfe/ffffff?text=Logo+Design+4', category: 'logo' }
+            ],
+            banner: [
+                { id: 5, src: 'https://via.placeholder.com/800x400/667eea/ffffff?text=Banner+Design+1', category: 'banner' },
+                { id: 6, src: 'https://via.placeholder.com/800x400/764ba2/ffffff?text=Banner+Design+2', category: 'banner' },
+                { id: 7, src: 'https://via.placeholder.com/800x400/f093fb/ffffff?text=Banner+Design+3', category: 'banner' }
+            ],
+            poster: [
+                { id: 8, src: 'https://via.placeholder.com/600x800/667eea/ffffff?text=Poster+Design+1', category: 'poster' },
+                { id: 9, src: 'https://via.placeholder.com/600x800/764ba2/ffffff?text=Poster+Design+2', category: 'poster' },
+                { id: 10, src: 'https://via.placeholder.com/600x800/f093fb/ffffff?text=Poster+Design+3', category: 'poster' }
+            ]
+        };
+
+        let isAdmin = false;
+        let currentEditId = null;
+        let currentCategory = 'all';
+
+        // Initialize
+        function init() {
+            const saved = localStorage.getItem('portfolioDesigns');
+            if (!saved) {
+                // Save initial sample data
+                saveData();
+            } else {
+                loadData();
+            }
+            showCategory('all');
+        }
+
+        // Load data from localStorage
+        function loadData() {
+            const saved = localStorage.getItem('portfolioDesigns');
+            if (saved) {
+                designs = JSON.parse(saved);
+            }
+        }
+
+        // Save data to localStorage
+        function saveData() {
+            localStorage.setItem('portfolioDesigns', JSON.stringify(designs));
+        }
+
+        // Show login form
+        function showLoginForm() {
+            document.getElementById('publicView').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        // Login
+        function login() {
+            const password = document.getElementById('password').value;
+            if (password === '2802') {
+                isAdmin = true;
+                document.getElementById('publicView').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'block';
+                renderAdminGalleries();
+            } else {
+                document.getElementById('loginError').textContent = 'Mật khẩu không đúng!';
+            }
+        }
+
+        // Logout
+        function logout() {
+            isAdmin = false;
+            document.getElementById('password').value = '';
+            showSection('public');
+        }
+
+        // Show section
+        function showSection(section) {
+            if (section === 'public') {
+                document.getElementById('publicView').style.display = 'block';
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('adminPanel').style.display = 'none';
+                showCategory('all');
+            }
+        }
+
+        // Show category
+        function showCategory(category) {
+            currentCategory = category;
+            
+            // Hide all sections
+            document.getElementById('allSection').classList.add('hidden');
+            document.getElementById('logoSection').classList.add('hidden');
+            document.getElementById('bannerSection').classList.add('hidden');
+            document.getElementById('posterSection').classList.add('hidden');
+            
+            // Show selected section
+            if (category === 'all') {
+                document.getElementById('allSection').classList.remove('hidden');
+                const allImages = [...designs.logo, ...designs.banner, ...designs.poster];
+                renderGallery('overviewGallery', allImages);
+            } else if (category === 'logo') {
+                document.getElementById('logoSection').classList.remove('hidden');
+                renderGallery('logoGallery', designs.logo);
+            } else if (category === 'banner') {
+                document.getElementById('bannerSection').classList.remove('hidden');
+                renderGallery('bannerGallery', designs.banner);
+            } else if (category === 'poster') {
+                document.getElementById('posterSection').classList.remove('hidden');
+                renderGallery('posterGallery', designs.poster);
+            }
+        }
+
+        // Scroll to section
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Preview image
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add image
+        function addImage() {
+            const fileInput = document.getElementById('imageUpload');
+            const category = document.getElementById('category').value;
+            
+            if (!fileInput.files[0]) {
+                alert('Vui lòng chọn ảnh!');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const newImage = {
+                    id: Date.now(),
+                    src: e.target.result,
+                    category: category
+                };
+
+                designs[category].push(newImage);
+                saveData();
+                renderAdminGalleries();
+                renderPublicGalleries();
+
+                // Reset form
+                fileInput.value = '';
+                document.getElementById('imagePreview').style.display = 'none';
+                alert('Đã thêm ảnh thành công!');
+            };
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+
+        // Delete image
+        function deleteImage(category, id) {
+            if (confirm('Bạn có chắc muốn xóa ảnh này?')) {
+                designs[category] = designs[category].filter(img => img.id !== id);
+                saveData();
+                renderAdminGalleries();
+                showCategory(currentCategory);
+            }
+        }
+
+        // Render public galleries
+        function renderPublicGalleries() {
+            const allImages = [...designs.logo, ...designs.banner, ...designs.poster];
+            renderGallery('overviewGallery', allImages);
+            renderGallery('logoGallery', designs.logo);
+            renderGallery('bannerGallery', designs.banner);
+            renderGallery('posterGallery', designs.poster);
+        }
+
+        // Render gallery
+        function renderGallery(elementId, images) {
+            const gallery = document.getElementById(elementId);
+            if (images.length === 0) {
+                gallery.innerHTML = '<div class="empty-state">Chưa có thiết kế nào</div>';
+                return;
+            }
+
+            gallery.innerHTML = images.map(img => `
+                <div class="gallery-item" onclick="openModal('${img.src}')">
+                    <img src="${img.src}" alt="Design">
+                </div>
+            `).join('');
+        }
+
+        // Render admin galleries
+        function renderAdminGalleries() {
+            renderAdminGallery('adminLogoGallery', designs.logo, 'logo');
+            renderAdminGallery('adminBannerGallery', designs.banner, 'banner');
+            renderAdminGallery('adminPosterGallery', designs.poster, 'poster');
+        }
+
+        // Render admin gallery
+        function renderAdminGallery(elementId, images, category) {
+            const gallery = document.getElementById(elementId);
+            if (images.length === 0) {
+                gallery.innerHTML = '<div class="empty-state">Chưa có thiết kế nào</div>';
+                return;
+            }
+
+            gallery.innerHTML = images.map(img => `
+                <div class="admin-item">
+                    <img src="${img.src}" alt="Design">
+                    <div class="admin-actions">
+                        <button class="delete-btn" onclick="deleteImage('${category}', ${img.id})">Xóa</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Open modal
+        function openModal(src) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = 'block';
+            modalImg.src = src;
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
