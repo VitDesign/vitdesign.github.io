@@ -1193,7 +1193,14 @@
                     designs[category].push(newImage);
                     saveData();
                     renderAdminGalleries();
-                    showCategory(currentCategory);
+                    
+                    // Update current view without logging out
+                    if (currentCategory === 'all') {
+                        const allImages = [...designs.logo, ...designs.banner, ...designs.poster];
+                        renderGallery('overviewGallery', allImages);
+                    } else if (currentCategory === category) {
+                        renderGallery(category + 'Gallery', designs[category]);
+                    }
 
                     // Reset form
                     fileInput.value = '';
@@ -1229,7 +1236,14 @@
                 designs[category] = designs[category].filter(img => img.id !== id);
                 saveData();
                 renderAdminGalleries();
-                showCategory(currentCategory);
+                
+                // Update current view without logging out
+                if (currentCategory === 'all') {
+                    const allImages = [...designs.logo, ...designs.banner, ...designs.poster];
+                    renderGallery('overviewGallery', allImages);
+                } else if (currentCategory === category) {
+                    renderGallery(category + 'Gallery', designs[category]);
+                }
             }
         }
 
